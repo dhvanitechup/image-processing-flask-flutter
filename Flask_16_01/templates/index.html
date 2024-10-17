@@ -1,0 +1,255 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Containers Example</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        #selectedImage {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Container 1</h2>
+    <form id="fileForm">
+        <label for="fileInput">Choose Image:</label>
+        <input type="file" id="fileInput" accept="image/*">
+        <button type="button" onclick="submitImage()">Submit Image</button>
+    </form>
+    <img id="selectedImage" alt="Selected Image">
+</div>
+
+<div class="container">
+    <h2>Container 2</h2>
+    <form id="textInputForm">
+        <label for="textInput">Enter Text:</label>
+        <input type="text" id="textInput">
+        <button type="button" onclick="submitText()">Submit Text</button>
+    </form>
+</div>
+
+<script>
+    function submitImage() {
+        // Get the selected image file
+        var fileInput = document.getElementById('fileInput');
+        var selectedFile = fileInput.files[0];
+
+        if (selectedFile && selectedFile.type.startsWith('image/')) {
+            // Display the selected image in Container 1
+            var selectedImageElement = document.getElementById('selectedImage');
+            selectedImageElement.src = URL.createObjectURL(selectedFile);
+        } else {
+            alert("Please select a valid image file.");
+        }
+
+        // Reset the file input
+        document.getElementById('fileForm').reset();
+    }
+
+    function submitText() {
+        // Get the entered text
+        var textInput = document.getElementById('textInput').value;
+
+        // You can perform additional actions with the entered text here
+        console.log("Entered Text:", textInput);
+
+        // Reset the text input
+        document.getElementById('textInputForm').reset();
+    }
+</script>
+
+</body>
+</html> -->
+
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Recognition App</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            display: inline-block;
+            position: relative; /* Added for positioning */
+        }
+
+        #languageSelector {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+        }
+
+        #selectedImage, #selectedResultImage, #numbers {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 10px;
+        }
+
+        #selectedImage {
+            float: left;
+        }
+
+        #selectedResultImage {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="languageSelector">
+        <label for="languageSelect">Select Language:</label>
+        <select id="languageSelect">
+            <option value="eng">English</option>
+            <option value="guj">Gujarati</option>
+            <option value="hin">Hindi</option>
+        </select>
+    </div>
+
+    <h2>Upload Image</h2>
+    <form id="fileForm" action="/" method="post" enctype="multipart/form-data">
+        <label for="fileInput">Choose Image:</label>
+        <input type="file" name="file" id="fileInput" accept="image/*">
+        <button type="submit">Submit Image</button>
+    </form>
+    {% if original_image %}
+        <img id="selectedImage" src="{{ url_for('static', filename='uploads/' + original_image) }}" alt="Selected Image">
+    {% endif %}
+    {% if numeric_values %}
+    <p id="numbers">Extracted Numbers: {{ numeric_values }}</p>
+    {% endif %}
+</div>
+
+<div class="container">
+    <h2>Result</h2>
+    <form id="textInputForm" action="/" method="post">
+        <label for="textInput">Enter Text:</label>
+        <input type="text" name="text" id="textInput">
+        <button type="submit">Submit Text</button>
+    </form>
+    {% if result_image %}
+        <img id="selectedResultImage" src="{{ url_for('static', filename='uploads/' + result_image) }}" alt="Result Image">
+    {% endif %}
+</div>
+
+{% if contours_result %}
+    <p>Contours Result: {{ contours_result }}</p>
+{% endif %}
+
+</body>
+</html>-->
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Recognition App</title>
+    <style>
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        #languageSelector {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1;
+        }
+
+        #selectedImage, #selectedResultImage,#numbers {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 10px;
+        }
+
+        #selectedImage {
+            float: left;
+        }
+
+        #selectedResultImage {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="languageSelector">
+        <label for="languageSelect">Select Language:</label>
+        <select id="languageSelect">
+            <option value="eng">English</option>
+            <option value="guj">Gujarati</option>
+            <option value="hin">Hindi</option>
+        </select>
+    </div>
+    <h2>Upload Image</h2>
+    <form id="fileForm" action="/" method="post" enctype="multipart/form-data">
+        <label for="fileInput">Choose Image:</label>
+        <input type="file" name="file" id="fileInput" accept="image/*">
+        <button type="submit">Submit Image</button>
+    </form>
+    {% if original_image %}
+        <img id="selectedImage" src="{{ url_for('static', filename='uploads/' + original_image) }}" alt="Selected Image">
+    {% endif %}
+    {% if numeric_values %}
+    <p id="numbers">Extracted Numbers: {{ numeric_values }}</p>
+    {% endif %}
+</div>
+
+<div class="container">
+    <h2>Result</h2>
+    <form id="textInputForm" action="/" method="post">
+        <label for="textInput">Enter Text:</label>
+        <input type="text" name="text" id="textInput">
+        <button type="submit">Submit Text</button>
+    </form>
+    {% if result_image %}
+        <img id="selectedResultImage" src="{{ url_for('static', filename='uploads/' + result_image) }}" alt="Result Image">
+    {% endif %}
+
+    
+</div>
+
+{% if contours_result %}
+    <p>Contours Result: {{ contours_result }}</p>
+{% endif %}
+
+<form id="nextPageForm" action="/next" method="get">
+    <button type="submit">Next</button>
+</form>
+
+
+</body>
+</html>

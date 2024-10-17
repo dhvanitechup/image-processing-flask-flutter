@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Page</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+
+    <div>
+        <form id="searchForm" action="/search" method="get">
+            <label for="imageNameInput">Enter Image Name:</label>
+            <input type="text" name="image_name" id="imageNameInput" required>
+            <button type="submit">Search Image</button>
+        </form>
+    </div>
+
+    <div id="resultContainer" style="margin-top: 20px;">
+        {% if searched_image_name %}
+            <p>Entered Image Name: {{ searched_image_name }}</p>
+            <!-- You can display additional information or results here -->
+        {% endif %}
+    </div>
+</body>
+</html>
